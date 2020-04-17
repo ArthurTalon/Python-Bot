@@ -1,0 +1,49 @@
+from selenium import webdriver
+import time 
+import random
+import sys
+x = 0
+while x < 433:
+    def print_same_line(text):
+        sys.stdout.write('\r')
+        sys.stdout.flush()
+        sys.stdout.write(text)
+        sys.stdout.flush()
+
+    class InstagramBot:
+
+        def __init__(self, username, password):
+            self.username = username
+            self.password = password
+            self.base_url = 'https://www.instagram.com'
+            self.driver = webdriver.Chrome('./chromedriver.exe')
+            self.login()
+
+        def login(self):
+            self.driver.get('{}/accounts/login/'.format(self.base_url))
+            time.sleep(2)
+            self.driver.find_element_by_name("username").send_keys(self.username)
+            self.driver.find_element_by_name("password").send_keys(self.password)
+            time.sleep(1)
+            self.driver.find_elements_by_xpath("//div[contains(text(), 'Log In')]")[0].click()
+            time.sleep(6)
+            self.driver.find_element_by_xpath("//button[contains(text(), 'Not Now')]")\
+            .click()
+            time.sleep(2)    
+            //click on recommended, extract the xcode of the button
+            self.driver.find_elements_by_xpath("//section/main/section/div[3]/div[3]/div[1]/a/div")[0].click()
+            time.sleep(2)
+            //click on follow
+            self.driver.find_elements_by_xpath("//section/main/div/div[2]/div/div/div[1]/div[3]/button")[0].click()
+            time.sleep(2)
+            //close browser
+            self.driver.close()
+            time.sleep(4)
+                       
+    x = x + 1
+
+    if __name__ == "__main__":
+        username = "type your name"
+        password = "type your password"
+        com = InstagramBot(username, password)
+    
